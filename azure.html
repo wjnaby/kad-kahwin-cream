@@ -288,14 +288,17 @@
     .sec--program { padding-bottom: 70px; }
     .meta { margin: 8px auto 0; max-width: 300px; font-size: 16px; line-height: 1.5; color: var(--soft); }
     .meta strong { font-weight: 600; color: var(--ink); }
-    .timeline { list-style: none; margin: 28px auto 0; padding: 0; max-width: calc(var(--w) - 56px); text-align: left; position: relative; }
-    .timeline::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--gold), rgba(201, 162, 90, .3)); }
-    .timeline li { position: relative; padding: 0 0 26px 30px; }
-    .timeline li:last-child { padding-bottom: 0; }
-    .timeline li::before { content: ""; position: absolute; left: 0; top: 5px; width: 11px; height: 11px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #b4c9ac, #6a8267); box-shadow: 0 0 0 3px #f6f1e6, 0 0 0 4px var(--gold); }
-    .timeline time { display: block; font-family: "Cinzel", serif; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--olive); }
-    .timeline h3 { margin: 3px 0 0; font-size: 23px; font-weight: 600; line-height: 1.2; color: var(--plum); }
-    .timeline p { margin: 4px 0 0; font-size: 17px; line-height: 1.5; color: var(--soft); }
+    .sec--program .title { color: #7b2d33; }
+    .timeline { list-style: none; margin: 34px auto 0; padding: 0; max-width: 420px; display: grid; row-gap: 12px; }
+    .timeline li { display: grid; grid-template-columns: minmax(0, 1.14fr) minmax(0, .86fr); align-items: center; column-gap: 10px; min-height: 96px; }
+    .timeline .ic { justify-self: end; width: 104px; height: 87px; color: #a98580; }
+    .timeline .ic svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .timeline .tx { text-align: left; font-family: "Cinzel", serif; text-transform: uppercase; color: #4e4340; white-space: nowrap; }
+    .timeline .tm { display: block; font-size: clamp(10.5px, 2.9vw, 12.5px); letter-spacing: .12em; line-height: 1.4; }
+    .timeline .tt { display: block; margin-top: 7px; font-size: clamp(9.5px, 2.7vw, 12.5px); letter-spacing: .08em; line-height: 1.4; }
+    .timeline li.alt .ic { order: 2; justify-self: start; }
+    .timeline li.alt .tx { order: 1; text-align: right; justify-self: end; }
+    @media (max-width: 380px) { .timeline .ic { width: 88px; height: 73px; } .timeline .tt { letter-spacing: .05em; } }
 
     /* Address / contacts */
     .icon { display: block; margin: 0 auto 12px; color: var(--olive); }
@@ -545,12 +548,6 @@
     .in .rule, .in .orn i { transform: none; }
     .utama-arch.in .orn i { transition-delay: 1s; }
 
-    /* Timeline grows as it enters */
-    .timeline::before { transform-origin: 50% 0; transform: scaleY(0); transition: transform 1.9s cubic-bezier(.4, .1, .2, 1) .2s; }
-    .timeline.in::before { transform: scaleY(1); }
-    .timeline li::before { transform: scale(0); transition: transform .7s cubic-bezier(.3, 1.6, .5, 1) calc(var(--d, 0s) + .3s); }
-    .timeline li.in::before { transform: none; }
-
     .contact.in:hover { transform: translateY(-2px); }
 
     /* Garland swings softly, hearts beat */
@@ -585,7 +582,6 @@
       .cd b { font-size: 46px; }
       .detail dd { font-size: 20.5px; }
       .event-name { font-size: 52px; }
-      .timeline h3 { font-size: 25px; }
       .side { height: 680px; }
       .date-stack { font-size: 96px; }
       .hero .names { font-size: 58px; }
@@ -657,15 +653,9 @@
       .place { font-size: 32px; }
       .addr { font-size: 21px; }
 
-      /* Timeline lies on its side */
-      .timeline { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 30px; max-width: 960px; text-align: center; }
-      .timeline::before { left: 0; right: 0; top: 5px; bottom: auto; width: auto; height: 1px; background: linear-gradient(90deg, transparent, var(--gold) 14%, var(--gold) 86%, transparent); transform-origin: 0 50%; transform: scaleX(0); }
-      .timeline.in::before { transform: scaleX(1); }
-      .timeline li { padding: 34px 8px 0; }
-      .timeline li::before { left: 50%; top: 0; margin-left: -5.5px; }
-      .timeline h3 { font-size: 27px; }
-      .timeline p { font-size: 18.5px; }
-      .timeline time { font-size: 12px; }
+      .timeline { max-width: 560px; }
+      .timeline .tm { font-size: 13px; }
+      .timeline .tt { font-size: 14px; }
 
       .contacts { grid-template-columns: repeat(3, 1fr); max-width: 960px; gap: 22px; }
       .contact { grid-template-columns: 42px 1fr; grid-template-areas: "i n" "i t"; column-gap: 16px; row-gap: 2px; padding: 20px 24px; }
@@ -737,7 +727,7 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal, .reveal.rv-write, .frame.reveal, .swag { opacity: 1; transform: none; filter: none; clip-path: none; }
       .stagger > * { opacity: 1; transform: none; filter: none; }
-      .rule, .orn i, .timeline::before, .timeline li::before { transform: none; }
+      .rule, .orn i { transform: none; }
     }
   </style>
 </head>
@@ -870,8 +860,6 @@
     <section class="sec sec--program" id="aturcara">
       <header class="head reveal">
         <h2 class="title">Atur Cara</h2>
-        <p class="eyebrow" style="margin-top:10px">Majlis Perkahwinan</p>
-        <p class="meta"><span data-k="weekday">Sabtu</span>, <span data-k="dateLong">12 Jun 2027</span> &middot; <strong data-k="venue">Dewan Cinta Kasih</strong></p>
       </header>
       <ol class="timeline reveal" id="program"></ol>
     </section>
@@ -974,9 +962,12 @@
         { name: "Ibu", tel: "011-123 4567" }
       ],
       program: [
-        { time: "11:00 Pagi", title: "Ketibaan Tetamu", text: "Jamuan dibuka untuk para tetamu yang hadir." },
-        { time: "12:00 Tengah Hari", title: "Ketibaan Pengantin", text: "Kompang dan sirih junjung mengiringi pasangan pengantin." },
-        { time: "3:30 Petang", title: "Majlis Bersurai", text: "Terima kasih atas kesudian hadir dan mendoakan kami." }
+        { time: "11:30 AM", title: "Ketibaan Tetamu", icon: "guests" },
+        { time: "12:30 PM", title: "Ketibaan Pengantin", icon: "couple" },
+        { time: "1:00 PM", title: "Makan Beradab", icon: "dinner" },
+        { time: "1:30 PM", title: "Upacara Memotong Kek", icon: "cake" },
+        { time: "2:00 PM", title: "Sesi Bergambar", icon: "camera" },
+        { time: "4:00 PM", title: "Majlis Bersurai", icon: "carriage" }
       ]
     };
 
@@ -1025,18 +1016,145 @@
       addr.appendChild(document.createTextNode(line));
     });
 
+    // Detailed line-art icons for the Atur Cara (viewBox 120 x 100)
+    const T = ' fill="currentColor" fill-opacity=".1"';
+    const ICON_VIEW = "0 0 120 100";
+    const spokes = (cx, cy, r, n) => {
+      let d = "";
+      for (let k = 0; k < n; k++) {
+        const a = (k / n) * Math.PI;
+        const dx = Math.cos(a), dy = Math.sin(a);
+        d += "M" + (cx - dx * (r - 1)).toFixed(1) + " " + (cy - dy * (r - 1)).toFixed(1) + "L" + (cx + dx * (r - 1)).toFixed(1) + " " + (cy + dy * (r - 1)).toFixed(1);
+      }
+      return d;
+    };
+    const vlines = (x0, x1, step, y0, y1) => {
+      let d = "";
+      for (let x = x0; x <= x1; x += step) d += "M" + x + " " + y0 + "V" + y1;
+      return d;
+    };
+    const ICONS = {
+      guests:
+        /* man */
+        '<path' + T + ' d="M28.5 12q0-8 5.5-8t5.5 8q-2-3-5.5-3t-5.5 3z"/><ellipse cx="34" cy="13" rx="5.2" ry="6.4"/>' +
+        '<path d="M32 19.5v4M36 19.5v4"/>' +
+        '<path' + T + ' d="M22 30q5-6 12-7 7 1 12 7l3 27-7 1-1-16v21H27V42l-1 16-7-1z"/>' +
+        '<path d="M30 23l4 7 4-7M34 30v28M37 35h4v4h-4zM27 59h14M23.5 56l-1 3M44.5 56l1 3"/>' +
+        '<circle cx="34" cy="35" r=".6"/><circle cx="34" cy="41" r=".6"/><circle cx="34" cy="47" r=".6"/><circle cx="34" cy="53" r=".6"/>' +
+        '<path' + T + ' d="M27 61h14l1 31h-6.5L34 72l-1.5 20H26z"/><path d="M34 62v10M26 92h6.5v3H25zM35.5 92h6.5l1 3H35z"/>' +
+        /* woman */
+        '<path' + T + ' d="M72 13q0-9 6-9t6 9q1 9 2 17-3 1-4-4 0-6-1-9-5-1-9-4z"/><ellipse cx="78" cy="14" rx="5" ry="6.3"/>' +
+        '<path d="M76 20.5v3.5M80 20.5v3.5"/>' +
+        '<path' + T + ' d="M68 31q5-6 10-7 5 1 10 7l3 25-6 1-2-13 3 50H67l4-50-2 13-6-1z"/>' +
+        '<path d="M72 25q6 4 12 0M70 44l-3 50M86 44l3 50M72 62h12M71 78h14M74 62l-1 32M78 62v32M82 62l1 32M66 94h6v2h-7zM84 94h6l1 2h-7z"/>' +
+        '<path d="M70 28q8 10 17 3"/>',
+      couple:
+        /* bride */
+        '<path' + T + ' d="M32 12q0-9 9-9t9 9q5 24 7 56-8 4-16 4t-16-4q2-32 7-56z" fill-opacity=".05"/>' +
+        '<ellipse cx="41" cy="15" rx="5" ry="6.2"/><path d="M36 13q0-8 5-8t5 8q-3-3-10 0zM38 6l1-3 2 2 2-2 1 3"/>' +
+        '<path d="M39 21v3M43 21v3"/>' +
+        '<path' + T + ' d="M35 29q3-5 6-5t6 5l2 14H33z"/><path d="M37 27q2 3 4 1 2 2 4-1M33 43h16"/>' +
+        '<path' + T + ' d="M33 43Q25 70 19 94h44Q57 70 49 43z"/>' +
+        '<path d="M37 46q-4 24-9 46M41 44v50M45 46q4 24 9 46M19 94q5-3 10 0t10 0t10 0t10 0t5 0"/>' +
+        '<path d="M35 30l-3 14 5 6M47 30l6 13 10 9"/>' +
+        '<path' + T + ' d="M30 52q-3-3-6 0t0 5 6-2z"/><path d="M26 50l-3-3M28 51l-1-4"/>' +
+        /* groom */
+        '<path' + T + ' d="M82 11l1-8h10l1 8z"/><path d="M82 8h12"/><ellipse cx="88" cy="17" rx="5" ry="6.2"/>' +
+        '<path d="M86 23v3M90 23v3"/>' +
+        '<path' + T + ' d="M76 33q6-6 12-7t12 7l2 27-7 1-1-17v22H82V44l-1 17-7-1z"/>' +
+        '<path d="M85 26l3 6 3-6M88 32v28M92 38h4v4h-4z"/><circle cx="88" cy="37" r=".6"/><circle cx="88" cy="43" r=".6"/><circle cx="88" cy="49" r=".6"/>' +
+        '<path' + T + ' d="M82 58h12v16H82z"/><path d="M88 58v16M82 66h12M85 62l3 4 3-4M85 70l3-4 3 4"/>' +
+        '<path' + T + ' d="M82 74h12l1 20h-6l-1-13-1 13h-6z"/><path d="M80 94h7v3h-8zM90 94h7l1 3h-8z"/>' +
+        '<path d="M77 34l-7 16-6 3"/><circle cx="63" cy="53" r="2.4"/>',
+      dinner:
+        '<circle cx="60" cy="50" r="36"/><circle cx="60" cy="50" r="31"/>' +
+        '<circle cx="60" cy="50" r="27" stroke-dasharray="1 3.4"/>' +
+        '<circle' + T + ' cx="60" cy="50" r="22"/>' +
+        '<path d="M60 14q4 3 0 6-4-3 0-6M60 80q4 3 0 6-4-3 0-6M24 50q3-4 6 0-3 4-6 0M90 50q3-4 6 0-3 4-6 0"/>' +
+        '<path fill="#fbf7ee" d="M49 28h22v42H49z"/><path d="M51.5 30.5h17v37h-17z"/>' +
+        '<circle cx="60" cy="37" r="2.2"/><path d="M55 37h3M62 37h3M55 43h10M55 47h10M55 51h10M55 55h7M56 62q4-4 8 0M58 60q2-3 4 0"/>' +
+        /* fork */
+        '<path d="M6 12v19q0 6 7 6t7-6V12M9.5 12v18M13 12v22M16.5 12v18M13 37v53"/><path d="M10 90q3 5 6 0z"/>' +
+        /* knife */
+        '<path' + T + ' d="M106 11q-9 12-6 38h6z"/><path d="M100 49h6v41q-3 3-6 0zM103 49v41"/>' +
+        /* spoon */
+        '<ellipse' + T + ' cx="115" cy="20" rx="4" ry="7"/><path d="M115 27v63M113 90q2 4 4 0"/>',
+      cake:
+        /* stand */
+        '<ellipse cx="60" cy="86" rx="46" ry="7"/><path d="M14 86v2q0 5 46 5t46-5v-2M54 93l-2 6h16l-2-6"/>' +
+        /* tier 1 */
+        '<path' + T + ' d="M24 62v20q36 10 72 0V62q-36 10-72 0z"/><ellipse cx="60" cy="62" rx="36" ry="8"/>' +
+        '<path d="M24 70q6 6 12 0t12 0t12 0t12 0t12 0t12 0"/>' +
+        '<circle cx="30" cy="77" r="1.3"/><circle cx="42" cy="78.5" r="1.3"/><circle cx="54" cy="80" r="1.3"/><circle cx="66" cy="80" r="1.3"/><circle cx="78" cy="78.5" r="1.3"/><circle cx="90" cy="77" r="1.3"/>' +
+        '<path d="M26 66l1-3M94 66l-1-3"/>' +
+        /* tier 2 */
+        '<path' + T + ' d="M36 44v18q24 8 48 0V44q-24 6-48 0z"/><ellipse cx="60" cy="44" rx="24" ry="6"/>' +
+        '<path d="M36 51q4 7 8 0t8 0t8 0t8 0t8 0t8 0"/>' +
+        '<path d="M38 56q2 3 4 0M50 59q2 3 4 0M66 59q2 3 4 0M78 56q2 3 4 0"/>' +
+        /* tier 3 */
+        '<path' + T + ' d="M46 29v15q14 6 28 0V29q-14 5-28 0z"/><ellipse cx="60" cy="29" rx="14" ry="4"/>' +
+        '<path d="M46 36q14 6 28 0M50 40l1 2M60 42v2M70 40l-1 2"/>' +
+        /* topper */
+        '<circle cx="60" cy="21" r="4.2"/><path d="M56 21q4-5 8 0M57.5 23q2.5 3 5 0M60 17v-2M52 25q-7-4-11 0 4 5 11 0M68 25q7-4 11 0-4 5-11 0M45 29q-4-6 0-9M75 29q4-6 0-9"/>' +
+        '<circle cx="44" cy="18" r="2"/><circle cx="76" cy="18" r="2"/><circle cx="52" cy="14" r="1.4"/><circle cx="68" cy="14" r="1.4"/>' +
+        '<path d="M39 44q-2-4 1-5t3 3M81 44q2-4-1-5t-3 3M30 62q-2-3 0-4t2 2M90 62q2-3 0-4t-2 2"/>',
+      camera:
+        /* strap lugs + strap */
+        '<circle cx="9" cy="42" r="2.4"/><circle cx="111" cy="42" r="2.4"/><path d="M7 41Q2 20 22 14M113 41Q118 20 98 14"/>' +
+        /* top plate pieces */
+        '<path' + T + ' d="M28 32l3-9h18l3 9z"/><path d="M33 23v-4h8v4M31 19h12"/>' +
+        '<path' + T + ' d="M92 32v-8h12v8z"/><path d="M94 28h8"/>' +
+        '<path d="M64 32v-6h10v6M66 26v-3h6v3"/>' +
+        /* body */
+        '<rect' + T + ' x="12" y="32" width="96" height="56" rx="6"/><path d="M12 48h96"/>' +
+        '<path d="' + vlines(17, 33, 2.8, 52, 83) + vlines(87, 103, 2.8, 52, 83) + '" stroke-width=".55" opacity=".7"/>' +
+        /* rangefinder windows + logo plate */
+        '<rect x="18" y="36" width="15" height="8" rx="1.5"/><rect x="87" y="36" width="15" height="8" rx="1.5"/><path d="M52 38h16M54 41h12"/>' +
+        /* lens */
+        '<circle cx="60" cy="64" r="23"/><circle cx="60" cy="64" r="20"/><circle cx="60" cy="64" r="17.5" stroke-dasharray="1 2"/>' +
+        '<circle cx="60" cy="64" r="14"/><circle' + T + ' cx="60" cy="64" r="9.5"/><circle cx="60" cy="64" r="4.5"/>' +
+        '<path d="M50 56q4-6 12-6M54 58q3-3 7-3"/>' +
+        '<circle cx="21" cy="52" r="1.2"/><circle cx="99" cy="52" r="1.2"/>',
+      carriage:
+        /* roof + lantern */
+        '<path' + T + ' d="M3 32q2-13 15-15h28q13 2 15 15z"/><path d="M18 17l-3 15M32 17v15M46 17l3 15M32 17v-5M28.5 12h7M30 12q2-4 4 0"/>' +
+        '<path d="M3 32h58"/><path d="M0 36h4v9H0zM1 45l1 2h2" />' +
+        /* cabin */
+        '<path' + T + ' d="M6 32h52v34H6z"/><path d="M6 66h52q2 0 2 4H4q0-4 2-4"/>' +
+        '<path d="M15 54V43q0-6 7-6t7 6v11zM35 54V43q0-6 7-6t7 6v11zM12 59h40M12 62h40M32 32v34"/>' +
+        '<path d="M8 70q2 5 5 0M51 70q2 5 5 0"/>' +
+        /* wheels */
+        '<circle cx="20" cy="82" r="16"/><circle cx="20" cy="82" r="14"/><circle cx="20" cy="82" r="4"/><circle cx="20" cy="82" r="1.3"/><path d="' + spokes(20, 82, 14, 8) + '"/>' +
+        '<circle cx="52" cy="85" r="11"/><circle cx="52" cy="85" r="9.5"/><circle cx="52" cy="85" r="3"/><circle cx="52" cy="85" r="1"/><path d="' + spokes(52, 85, 9.5, 8) + '"/>' +
+        '<path d="M20 82H52M58 72L96 60"/>' +
+        /* horse */
+        '<path' + T + ' d="M70 56C68 45 74 40 82 40H98Q104 40 106 34L110 22Q111 16 116 16L119 22Q119 26 115 27L112 28Q110 34 109 41Q108 52 103 60Q88 67 74 58Z"/>' +
+        '<path d="M96 60l-2 18 1 14h5l-1-14 4-18M104 58l4 15-4 4 1 13h5M75 58l-3 18 2 16h5l-2-16 3-18M82 61l2 18 1 13h5M74 92h6M95 92h6"/>' +
+        '<path d="M70 52q-9 6-7 20q1 7-3 12M71 55q-6 9-4 19M66 62q-4 6-2 12"/>' +
+        '<path d="M107 30q-5-1-6-6M108 25q-5-1-6-6M110 20q-4 0-5-4M111 16l-1-6 5 4"/>' +
+        '<circle cx="114.5" cy="21" r=".9"/><path d="M118 25l1 0M113 27l3 0"/>' +
+        '<path d="M106 38q6 10 -1 22M92 41q-2 9 0 19M112 22l3 6M117 24l-2 5M110 26Q80 42 49 46"/>'
+    };
     const program = document.getElementById("program");
     CARD.program.forEach((item, i) => {
+      const alt = i % 2 === 1;
       const li = document.createElement("li");
-      li.className = "reveal rv-right";
-      li.style.setProperty("--d", (i * 0.12) + "s");
+      li.className = "reveal " + (alt ? "alt rv-right" : "rv-left");
+      li.style.setProperty("--d", (i * 0.1) + "s");
+      const ic = document.createElement("span");
+      ic.className = "ic";
+      ic.setAttribute("aria-hidden", "true");
+      ic.innerHTML = '<svg viewBox="' + ICON_VIEW + '" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[item.icon] || "") + "</svg>";
+      const tx = document.createElement("div");
+      tx.className = "tx";
       const time = document.createElement("time");
-      const title = document.createElement("h3");
-      const text = document.createElement("p");
+      time.className = "tm";
       time.textContent = item.time;
+      const title = document.createElement("span");
+      title.className = "tt";
       title.textContent = item.title;
-      text.textContent = item.text;
-      li.append(time, title, text);
+      tx.append(time, title);
+      li.append(ic, tx);
       program.appendChild(li);
     });
 
